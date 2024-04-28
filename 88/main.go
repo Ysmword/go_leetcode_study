@@ -113,4 +113,11 @@ func main() {
 	nums2 = []int{1, 2, 2}
 	merge3(nums1, 6, nums2, 3)
 	fmt.Println("3", nums1)
+
+	var l int64 = 4
+	var c int64 = 7
+	a := make([]int, l, c)
+	fmt.Println(a)
+
+	fmt.Println((256 * 3) >> 2)
 }
