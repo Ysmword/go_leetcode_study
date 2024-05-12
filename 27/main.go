@@ -7,7 +7,7 @@ import (
 /*
 方法1removeElement1：双指针(交换法)，放后面
 方法2removeElement2：双指针，放前面
-方法2removeElement3：双指针，放前面，2和3的区别是减少了遍历的次数
+方法3removeElement3：双指针，放前面，2和3的区别是减少了遍历的次数
 */
 
 // 后移动
@@ -52,7 +52,7 @@ func removeElement1(nums []int, val int) int {
 			left++
 		}
 	}
-	return len(nums) - left
+	return left
 }
 
 func removeElement2(nums []int, val int) int {
@@ -69,6 +69,6 @@ func removeElement2(nums []int, val int) int {
 }
 
 func main() {
-	nums := []int{1}
-	fmt.Println(removeElement(nums, 1))
+	nums := []int{0, 1, 2, 2, 3, 0, 4, 2}
+	fmt.Println(removeElement1(nums, 2))
 }
