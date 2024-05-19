@@ -21,7 +21,7 @@ func maxProfit(prices []int) int {
 // 方法2：贪心算法：在遍历过程中，如果我遇到更低的，我会改变策略，我重新选择买入时间，每次遍历我都记录一次我的收入
 func maxProfit1(prices []int) int { // 有意思这个
 	max := 0
-	min := math.MaxInt
+	min := math.MaxInt // 直接等第一个值就可以
 	for i := 0; i < len(prices); i++ {
 		if prices[i] < min {
 			min = prices[i]

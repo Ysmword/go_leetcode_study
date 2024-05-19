@@ -18,3 +18,9 @@ func jump(nums []int) int {
 func main() {
 	fmt.Println(jump([]int{1, 1, 1, 1}))
 }
+
+
+// 2,3,1,1,4
+// 第一步 2
+// 第二步 3,1
+// 第三部 1,4
