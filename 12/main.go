@@ -81,6 +81,40 @@ func intToRoman(num int) string {
 	return result
 }
 
+// 方法2：根据罗马数字规则计算：对于罗马数字从左到右的每一位，选择尽可能大的符号值
+func intToRoman1(num int) string {
+	var valueSymbols = []struct {
+		value  int
+		symbol string
+	}{
+		{1000, "M"},
+		{900, "CM"},
+		{500, "D"},
+		{400, "CD"},
+		{100, "C"},
+		{90, "XC"},
+		{50, "L"},
+		{40, "XL"},
+		{10, "X"},
+		{9, "IX"},
+		{5, "V"},
+		{4, "IV"},
+		{1, "I"},
+	}
+	res := []byte{}
+	for _, vs := range valueSymbols {
+		for num >= vs.value {
+			res = append(res, vs.symbol...)
+			num = num - vs.value
+		}
+		if num == 0 {
+			break
+		}
+	}
+	return string(res)
+}
+
 func main() {
 	fmt.Println(intToRoman(99))
+	fmt.Println(intToRoman1(99))
 }
