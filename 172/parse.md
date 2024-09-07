@@ -1,0 +1,1 @@
+https://leetcode.cn/problems/factorial-trailing-zeroes/solutions/1366037/by-ac_oier-1y6w/?envType=study-plan-v2&envId=top-interview-150
