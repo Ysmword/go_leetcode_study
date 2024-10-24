@@ -15,16 +15,16 @@ func Constructor(root *TreeNode) BSTIterator {
 	b := BSTIterator{
 		arr: make([]int, 0),
 	}
-	inorder(root, b.arr)
+	inorder(root, &b.arr)
 	return b
 }
 
-func inorder(root *TreeNode, arr []int) {
+func inorder(root *TreeNode, arr *[]int) {
 	if root == nil {
 		return
 	}
 	inorder(root.Left, arr)
-	arr = append(arr, root.Val)
+	*arr = append(*arr, root.Val)
 	inorder(root.Right, arr)
 }
 
