@@ -29,6 +29,24 @@ func rotate(matrix [][]int) {
 	}
 }
 
+// 对称翻转，然后在左右翻转
+func rotate2(matrix [][]int) {
+
+	// 对称翻转
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < i; j++ {
+			matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+		}
+	}
+
+	// 左右翻转
+	for i := 0; i < len(matrix); i++ {
+		for j := 0; j < len(matrix[i])/2; j++ {
+			matrix[i][j], matrix[i][len(matrix[i])-j-1] = matrix[i][len(matrix[i])-j-1], matrix[i][j]
+		}
+	}
+}
+
 func main() {
 	matrix := [][]int{
 		{1, 2, 3},
