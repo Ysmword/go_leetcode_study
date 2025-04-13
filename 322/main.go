@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 // dp[i,j]为i种硬币可以凑成总金额所需的最小的硬币个数
 func coinChange(coins []int, amount int) int {
@@ -26,6 +29,31 @@ func coinChange(coins []int, amount int) int {
 		return -1
 	}
 	return dp[len(coins)][amount]
+}
+
+/*
+dp[i] 表示 位i时，需要金币最小数
+动态规划方程位：dp[i] = min(dp[i-coins[j]+1)
+dp[0] = amount+1
+*/
+func coinChange1(coins []int, amount int) int {
+	dp := make([]int, amount+1)
+	dp[0] = 0
+	for j := 1; j <= amount; j++ {
+		dp[j] = math.MaxInt32
+	}
+
+	for i := 0; i < len(coins); i++ {
+		for j := coins[i]; j <= amount; j++ {
+			if dp[j-coins[i]] >= amount+1 {
+				dp[j] = min(dp[j-coins[i]]+1, dp[j])
+			}
+		}
+	}
+	if dp[amount] >= amount+1 {
+		return -1
+	}
+	return dp[amount]
 }
 
 func main() {

@@ -15,8 +15,18 @@ func reverseBits(num uint32) uint32 {
 	return res
 }
 
+// 思路很简单：找到第i位，移动到31-i位，i从0开始
+func reverseBits1(num uint32) uint32 {
+	var res uint32
+	for i := 0; i < 32; i++ {
+		bit := (num >> i) & 1 // 第i位的值
+		res = res | (bit << (31 - i))
+	}
+	return res
+}
+
 func main() {
-	fmt.Println(reverseBits(10))
+	fmt.Println(reverseBits1(10))
 
 	// fmt.Printf("%b\n", 1)
 	// fmt.Printf("%b\n", 1<<1)

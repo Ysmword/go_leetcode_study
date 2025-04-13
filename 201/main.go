@@ -12,16 +12,17 @@ func rangeBitwiseAnd(left int, right int) int {
 	return right
 }
 
-func rangeBitwiseAnd1(left, right int) int {
+// 找公共前缀
+func rangeBitwiseAnd1(m int, n int) int {
 	shift := 0
-	for left < right {
-		left = left >> 1
-		right = right >> 1
+	for m < n {
+		m, n = m>>1, n>>1
 		shift++
 	}
-	return right << shift
+	return m << shift
 }
 
 func main() {
-	fmt.Println(rangeBitwiseAnd(1, 2147483647))
+	fmt.Println(rangeBitwiseAnd(1, 9))
+	fmt.Println(rangeBitwiseAnd1(1, 9))
 }
