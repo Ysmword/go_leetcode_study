@@ -39,4 +39,31 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 
 func main() {
 	fmt.Println(insert([][]int{{1, 3}, {6, 9}}, []int{2, 5}))
+
+	fmt.Println(insert1([][]int{{1, 3}, {6, 9}}, []int{2, 5}))
+}
+
+// 三阶段方法：第一步：先看 a[1] < new[0]，这个时候直接加入结果；第二步：a[0] < new[1],这个时候一定有交接,将合并的结果加入结果，第三步：添加剩余区间
+func insert1(intervals [][]int, newInterval []int) [][]int {
+	i, n := 0, len(intervals)-1
+	res := make([][]int, 0)
+	// 第一步：先看 a[1] < new[0]，这个时候直接加入结果
+	for i <= n && intervals[i][1] < newInterval[0] {
+		res = append(res, intervals[i])
+		i++
+	}
+
+	// 第二步：a[0] < new[1],这个时候一定有交接
+	for i <= n && intervals[i][0] <= newInterval[1] {
+		newInterval[0] = min(intervals[i][0], newInterval[0])
+		newInterval[1] = min(intervals[i][1], newInterval[1])
+		i++
+	}
+	res = append(res, newInterval)
+
+	// 第三步：添加剩余区间
+	for i <= n {
+		res = append(res, intervals[i])
+	}
+	return res
 }

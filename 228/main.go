@@ -39,4 +39,29 @@ func summaryRanges(nums []int) []string {
 func main() {
 	fmt.Println(summaryRanges([]int{0, 1, 2, 4, 5}))
 	fmt.Println(summaryRanges([]int{0, 2, 3, 4, 6, 8, 9}))
+
+	fmt.Println(summaryRanges1([]int{0, 1, 2, 4, 5}))
+	fmt.Println(summaryRanges1([]int{0, 2, 3, 4, 6, 8, 9}))
+}
+
+func summaryRanges1(nums []int) []string {
+	res := make([]string, 0)
+	appendRes := func(left, right int) {
+		if left == right {
+			res = append(res, fmt.Sprintf("%d", nums[left]))
+		} else {
+			res = append(res, fmt.Sprintf("%d->%d", nums[left], nums[right]))
+		}
+	}
+	left, right := 0, 0
+	for i := 1; i < len(nums); i++ {
+		if nums[i]-1 == nums[right] {
+			right++
+			continue
+		}
+		appendRes(left, right)
+		left, right = i, i
+	}
+	appendRes(left, right)
+	return res
 }

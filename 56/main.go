@@ -87,4 +87,37 @@ func main() {
 		{8, 9},
 		{1, 10},
 	}))
+
+	fmt.Println(merge2([][]int{
+		{1, 3},
+		{2, 6},
+		{8, 10},
+		{15, 18},
+	}))
+
+	fmt.Println(merge2([][]int{
+		{2, 3},
+		{4, 5},
+		{6, 7},
+		{8, 9},
+		{1, 10},
+	}))
+}
+
+// 你要理解合并的逻辑：
+// a[1]>b[0]的时候才能合并，并且合并方式结果[a[0],b[1]]
+func merge2(intervals [][]int) [][]int {
+	sort.SliceStable(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	res := make([][]int, 0)
+	for i := 0; i < len(intervals); i++ {
+		last := len(res) - 1
+		if last >= 0 && intervals[i][0] <= res[last][1] {
+			res[last][1] = max(intervals[i][1], res[last][1])
+		} else {
+			res = append(res, intervals[i])
+		}
+	}
+	return res
 }
