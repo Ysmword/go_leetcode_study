@@ -35,9 +35,34 @@ func main() {
 	res := removeKdigits(num, k)
 	fmt.Println(res)
 
+	fmt.Println(removeKdigits1(num, k))
+
 	// res = removeKdigits("9", 1)
 	// fmt.Println(res)
 
 	// res = removeKdigits("112", 1)
 	// fmt.Println(res)
+}
+
+func removeKdigits1(num string, k int) string {
+	stack := make([]byte, 0)
+
+	for i := 0; i < len(num); i++ {
+		for k > 0 && len(stack) > 0 && stack[len(stack)-1] > num[i] {
+			stack = stack[:len(stack)-1]
+			k--
+		}
+		stack = append(stack, num[i])
+	}
+
+	if k > 0 {
+		stack = stack[:len(stack)-k]
+	}
+	for i := 0; stack[i] == '0'; i++ {
+		stack = stack[1:]
+	}
+	if len(stack) == 0 {
+		return "0"
+	}
+	return string(stack)
 }

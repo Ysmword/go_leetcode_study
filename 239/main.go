@@ -52,3 +52,21 @@ func maxSlidingWindow(nums []int, k int) []int {
 func main() {
 	fmt.Println(maxSlidingWindow([]int{-7, -8, 7, 5, 7, 1, 6, 0}, 4))
 }
+
+func maxSlidingWindow1(nums []int, k int) []int {
+	q := PriorityQueue{}
+	for i := 0; i < k; i++ {
+		q.Push(nums[i])
+	}
+
+	res := make([]int, 0)
+	res = append(res, q.Front())
+
+	for i := k; i < len(nums); i++ {
+		q.Pop(nums[i-k]) // 相等则删除队头
+		q.Push(nums[i])  // 入队列
+		res = append(res, q.Front())
+	}
+
+	return res
+}

@@ -61,4 +61,32 @@ func main() {
 	fmt.Println(coinChange([]int{186, 419, 83, 408}, 6249))
 	fmt.Println(coinChange([]int{2}, 3))
 	fmt.Println(coinChange([]int{1}, 0))
+
+	fmt.Println("=======")
+	// fmt.Println(coinChange2([]int{1, 2, 5}, 11))
+	fmt.Println(coinChange2([]int{186, 419, 83, 408}, 6249))
+	fmt.Println(coinChange2([]int{2}, 3))
+	// fmt.Println(coinChange2([]int{1}, 0))
+}
+
+func coinChange2(coins []int, amount int) int {
+	dp := make([]int, amount+1)
+	dp[0] = 0
+
+	for i := 1; i <= amount; i++ {
+		dp[i] = amount + 1 // 不能取最大值，因为可能会超出范围而变成负数
+	}
+
+	for i := 1; i <= amount; i++ {
+		for _, coin := range coins {
+			if i >= coin {
+				dp[i] = min(dp[i], dp[i-coin]+1)
+			}
+		}
+	}
+
+	if dp[amount] > amount {
+		return -1
+	}
+	return dp[amount]
 }

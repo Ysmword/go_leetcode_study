@@ -31,4 +31,29 @@ func main() {
 	heights := []int{2, 1, 5, 6, 2, 3}
 	res := largestRectangleArea(heights)
 	fmt.Println(res)
+
+	fmt.Println(largestRectangleArea1(heights))
+}
+
+func largestRectangleArea1(heights []int) int {
+
+	stack := make([]int, 0) // 放的是下标
+	maxArea := 0
+	heights = append([]int{0}, heights...)
+	heights = append(heights, 0)
+
+	for i := 1; i < len(heights); i++ {
+		for len(stack) > 0 && heights[i] <= stack[len(stack)-1] {
+			height := heights[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+			if len(stack) <= 0 {
+				break
+			}
+			left := stack[len(stack)-1]
+			right := i
+			maxArea = max(maxArea, (right-left-1)*height)
+		}
+		stack = append(stack, i)
+	}
+	return maxArea
 }

@@ -52,4 +52,24 @@ func main() {
 	fmt.Println(lengthOfLIS1([]int{7, 7, 7, 7}))
 	fmt.Println(lengthOfLIS1([]int{1, 3, 6, 7, 9, 4, 10, 5, 6}))
 
+	fmt.Println(lengthOfLIS2([]int{10, 9, 2, 5, 3, 7, 101, 18}))
+	fmt.Println(lengthOfLIS2([]int{0, 1, 0, 3, 2, 3}))
+	fmt.Println(lengthOfLIS2([]int{7, 7, 7, 7}))
+	fmt.Println(lengthOfLIS2([]int{1, 3, 6, 7, 9, 4, 10, 5, 6}))
+
+}
+
+func lengthOfLIS2(nums []int) int {
+	dp := make([]int, len(nums))
+	maxVal := 0
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 1
+		for j := 0; j < i; j++ {
+			if nums[j] < nums[i] {
+				dp[i] = max(dp[i], dp[j]+1)
+			}
+		}
+		maxVal = max(maxVal, dp[i])
+	}
+	return maxVal
 }

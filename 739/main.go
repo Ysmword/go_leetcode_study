@@ -17,7 +17,7 @@ func dailyTemperatures(temperatures []int) []int {
 		stack = append(stack, i)
 	}
 
-	// 剩余的温度，都没有找到之后更大的
+	// 剩余的温度，都没有找到之后更大的,这个部分是不需要的，因为没有赋值就是为0
 	for len(stack) != 0 {
 		answer[stack[len(stack)-1]] = 0
 		stack = stack[:len(stack)-1]
