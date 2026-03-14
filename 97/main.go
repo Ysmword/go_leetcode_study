@@ -72,7 +72,65 @@ func isInterleave(s1 string, s2 string, s3 string) bool {
 }
 
 func main() {
-	fmt.Println(isInterleaveFail("aabcc", "dbbca", "aadbbcbcac"))
-	fmt.Println(isInterleaveFail1("aabcc", "dbbca", "aadbbcbcac"))
-	fmt.Println(isInterleave("aabcc", "dbbca", "aadbbcbcac"))
+	// fmt.Println(isInterleaveFail("aabcc", "dbbca", "aadbbcbcac"))
+	// fmt.Println(isInterleaveFail1("aabcc", "dbbca", "aadbbcbcac"))
+	// fmt.Println(isInterleave("aabcc", "dbbca", "aadbbcbcac"))
+
+	fmt.Println(isInterleaveFail2("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail2("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail2("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail2("aabcc", "dbbca", "aadbbbaccc"))
+
+	fmt.Println("=======3========")
+	fmt.Println(isInterleaveFail3("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail3("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail3("aabcc", "dbbca", "aadbbcbcac"))
+	fmt.Println(isInterleaveFail3("aabcc", "dbbca", "aadbbbaccc"))
+
+}
+
+func isInterleaveFail2(s1, s2, s3 string) bool {
+
+	n, m := len(s1), len(s2)
+	dp := make([][]bool, n+1)
+	for i := 0; i <= n; i++ {
+		dp[i] = make([]bool, m+1)
+	}
+
+	dp[0][0] = true
+
+	for i := 0; i <= n; i++ { // 这里的i和j表示个数
+		for j := 0; j <= m; j++ {
+			p := i + j - 1
+			if i > 0 {
+				dp[i][j] = dp[i][j] || (s1[i-1] == s3[p] && dp[i-1][j])
+			}
+			if j > 0 {
+				dp[i][j] = dp[i][j] || (s2[j-1] == s3[p] && dp[i][j-1])
+			}
+		}
+	}
+	return dp[n][m]
+}
+
+func isInterleaveFail3(s1, s2, s3 string) bool {
+	n, m := len(s1), len(s2)
+	dp := make([][]bool, n+1) // 这里也是表示个数
+	for i := 0; i <= n; i++ {
+		dp[i] = make([]bool, m+1)
+	}
+
+	dp[0][0] = true
+	for i := 0; i <= n; i++ { // 这里的i和j都表示个数
+		for j := 0; j <= m; j++ {
+			p := i + j - 1
+			if i > 0 {
+				dp[i][j] = dp[i][j] || (s1[i-1] == s3[p] && dp[i-1][j])
+			}
+			if j > 0 {
+				dp[i][j] = dp[i][j] || (s2[j-1] == s3[p] && dp[i][j-1])
+			}
+		}
+	}
+	return dp[n][m]
 }
