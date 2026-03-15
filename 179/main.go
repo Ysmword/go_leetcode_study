@@ -34,4 +34,18 @@ func main() {
 
 	nums := []int{3, 30, 34, 5, 9}
 	fmt.Println(largestNumber(nums))
+
+	fmt.Println("====1======")
+	fmt.Println(largestNumber1(nums))
+}
+
+func largestNumber1(nums []int) string {
+	numStr := make([]string, len(nums))
+	for i := 0; i < len(nums); i++ {
+		numStr[i] = fmt.Sprintf("%d", nums[i])
+	}
+	sort.SliceStable(numStr, func(i, j int) bool {
+		return numStr[i]+numStr[j] > numStr[j]+numStr[i]
+	})
+	return strings.Join(numStr, "")
 }

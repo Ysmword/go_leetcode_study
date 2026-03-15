@@ -34,4 +34,23 @@ func lengthOfLastWord1(s string) int {
 
 func main() {
 	fmt.Println(lengthOfLastWord1("   fly me   to   the moon  "))
+
+	fmt.Println("=====其他题目=======")
+	fmt.Println(getAreaSum([]int{1, 2, 3, 4, 5}, 0, 1))
+	fmt.Println(getAreaSum([]int{1, 2, 3, 4, 5}, 1, 3))
+}
+
+func getAreaSum(nums []int, start, end int) int {
+	sums := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		if i > 0 {
+			sums[i] = sums[i-1] + nums[i]
+		} else {
+			sums[i] = nums[i]
+		}
+	}
+	if start == 0 {
+		return sums[end]
+	}
+	return sums[end] - sums[start-1]
 }
