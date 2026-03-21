@@ -23,7 +23,7 @@ func minMutation(startGene string, endGene string, bank []string) int {
 					}
 					if bankMap[newGene] {
 						queue = append(queue, newGene)
-						delete(bankMap, newGene)
+						delete(bankMap, newGene) // 这一步很关键，否则会出现死循环的
 					}
 				}
 			}

@@ -31,4 +31,31 @@ func main() {
 	fmt.Println(find132pattern([]int{1, 2, 3, 4}))  // false
 	fmt.Println(find132pattern([]int{3, 1, 4, 2}))  // true
 	fmt.Println(find132pattern([]int{-1, 3, 2, 0})) // true
+
+	fmt.Println("========1===========")
+	fmt.Println(find132pattern1([]int{1, 2, 3, 4}))  // false
+	fmt.Println(find132pattern1([]int{3, 1, 4, 2}))  // true
+	fmt.Println(find132pattern1([]int{-1, 3, 2, 0})) // true
+}
+
+func find132pattern1(nums []int) bool {
+	if len(nums) < 3 {
+		return false
+	}
+
+	st := make([]int, 0) // 这里说是维护k的单调递减栈，但是如果出去值之后，里面存的你可以看作是j
+	k := math.MinInt
+	for i := len(nums) - 1; i >= 0; i-- {
+		if nums[i] < k { // 这个时候表示，找到了i
+			return true
+		}
+
+		for len(st) > 0 && st[len(st)-1] < nums[i] {
+			// 出栈，并且能够记录最大的k
+			k = st[len(st)-1]
+			st = st[:len(st)-1]
+		}
+		st = append(st, nums[i])
+	}
+	return false
 }
