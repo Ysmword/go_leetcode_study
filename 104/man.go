@@ -65,3 +65,17 @@ func maxDepth1(root *common.TreeNode) int {
 	right := maxDepth1(root.Right) + 1
 	return max(left, right)
 }
+
+func maxDepth3(root *common.TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	left := maxDepth3(root.Left)
+	right := maxDepth3(root.Right)
+	return max(left, right) + 1
+}
+
+
+
+

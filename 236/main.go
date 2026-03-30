@@ -23,3 +23,5 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	}
 	return left // 如果右子树没找到, 就返回左子树，因为题意：p 和 q 均存在于给定的二叉树中。
 }
+
+
